@@ -119,7 +119,11 @@
     let m = [58, 10, top, 6];
     if (document.body.classList.contains('touch') && G.screen === 'play') {
       // the pads sit in the bottom corners: keep the floors beside them or above them, whichever is bigger
-      const lp = document.querySelector('.lpad').getBoundingClientRect(), rp = document.querySelector('.rpad').getBoundingClientRect();
+      const box = (sel) => {
+        const rs = [...document.querySelectorAll(sel + ' button')].filter((b) => b.offsetParent).map((b) => b.getBoundingClientRect());
+        return rs.length ? { left: Math.min(...rs.map((r) => r.left)), right: Math.max(...rs.map((r) => r.right)), top: Math.min(...rs.map((r) => r.top)) } : { left: W, right: 0, top: H };
+      };
+      const lp = box('.lpad'), rp = box('.rpad');
       const side = [Math.max(58, lp.right + 8), Math.max(10, W - rp.left + 8), top, 6];
       const below = [58, 10, top, Math.max(H - lp.top, H - rp.top) + 8];
       m = kOf(side) >= kOf(below) ? side : below;
@@ -185,7 +189,7 @@
     $('budBtn').querySelector('img').src = img || '';
     document.querySelector('.tb.call img').src = img || '';
     setText($('budLbl'), w.two ? 'HIGH FIVE' : `CALL ${NAME(who)}`);
-    setText(document.querySelector('.tb.call small'), w.two ? 'HIGH FIVE' : 'CALL');
+    setText(document.querySelector('.tb.call small'), w.two ? '✋' : 'CALL');
   }
   function call() {
     if (!G.w || G.demo || G.screen !== 'play' || G.paused) return false;
@@ -880,7 +884,7 @@
       if (o.who) G.who = o.who;
       if (o.level) G.level = o.level;
       play();
-      if (o.phase != null) { G.w.pi = o.phase; S.loadPhase(G.w); G.w.events = []; }
+      if (o.phase != null) { G.w.pi = o.phase; S.loadPhase(G.w); G.w.events = []; big(phaseName(), G.w.kind === 'bonus' ? 'GRAB THE COINS!' : 'READY?'); }
       if (o.go) { G.w.phase = 'play'; G.w.phaseT = 0; }
       return state();
     },

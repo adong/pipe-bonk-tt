@@ -1,0 +1,89 @@
+[
+ {
+  "label": "muted zh",
+  "js": "localStorage.setItem('claudeGames.muted', '1'); localStorage.setItem('claudeGames.lang', 'zh'); location.reload(); 'reload'",
+  "wait": 5000
+ },
+ {
+  "label": "title",
+  "js": "game.hold(true); game.step(1); new Promise(r => setTimeout(() => r(JSON.stringify(Kit.lang.untranslated())), 300))",
+  "shot": "zh-title"
+ },
+ {
+  "label": "help",
+  "js": "Kit.help.open(); new Promise(r => setTimeout(() => { const u = Kit.lang.untranslated(); Kit.help.close(); r(JSON.stringify(u)); }, 300))",
+  "shot": "zh-help"
+ },
+ {
+  "label": "ready",
+  "js": "game.start({level:'easy'}); game.step(0.4); new Promise(r => setTimeout(() => r(JSON.stringify(Kit.lang.untranslated())), 200))",
+  "shot": "zh-ready"
+ },
+ {
+  "label": "go",
+  "js": "game.step(1.2); new Promise(r => setTimeout(() => r(JSON.stringify(Kit.lang.untranslated())), 200))"
+ },
+ {
+  "label": "flip kick bye coin",
+  "js": "(() => { game.quiet(); const c = game.critter('beetle', 1, -6.6, 1); game.world().cfg = Object.assign({}, game.world().cfg, {speed: 0}); game.put(0, 0, -6.6); dispatchEvent(new KeyboardEvent('keydown',{code:'Space'})); game.step(0.05); dispatchEvent(new KeyboardEvent('keyup',{code:'Space'})); game.step(0.5); const u1 = Kit.lang.untranslated(); c.f = 0; c.y = 0; c.x = -5.6; c.air = false; game.step(0.4); const u2 = Kit.lang.untranslated(); game.step(1.1); return new Promise(r => setTimeout(() => r(JSON.stringify([u1, u2, Kit.lang.untranslated()])), 100)); })()",
+  "shot": "zh-kick"
+ },
+ {
+  "label": "buddy",
+  "js": "game.call(); game.step(0.7); const u = Kit.lang.untranslated(); game.step(1.2); game.call(); new Promise(r => setTimeout(() => r(JSON.stringify([u, Kit.lang.untranslated()])), 200))",
+  "shot": "zh-buddy"
+ },
+ {
+  "label": "boing bump, grumpy, upsy, oops",
+  "js": "(() => { game.step(3); const w = game.world(); w.cfg = Object.assign({}, w.cfg, {speed: 1}); game.put(0, 0, 0); dispatchEvent(new KeyboardEvent('keydown',{code:'Space'})); game.step(0.05); dispatchEvent(new KeyboardEvent('keyup',{code:'Space'})); game.step(0.3); const u0 = Kit.lang.untranslated(); w.level = 'normal'; w.cfg.crabHits = 2; const k = game.critter('crab', 1, 6, 1); k.dir = 1; game.put(0, 0, 6); dispatchEvent(new KeyboardEvent('keydown',{code:'Space'})); game.step(0.05); dispatchEvent(new KeyboardEvent('keyup',{code:'Space'})); game.step(0.3); const u1 = Kit.lang.untranslated(); const b = game.critter('beetle', 2, 0, 1); b.st = 'flip'; b.flipT = 0.05; game.step(0.3); const u2 = Kit.lang.untranslated(); game.critter('beetle', 0, -1, -1); game.put(0, 0, -2); game.step(0.6); return new Promise(r => setTimeout(() => r(JSON.stringify([u0, u1, u2, Kit.lang.untranslated()])), 100)); })()",
+  "shot": "zh-oops"
+ },
+ {
+  "label": "pause",
+  "js": "game.pause(); new Promise(r => setTimeout(() => r(JSON.stringify(Kit.lang.untranslated())), 200))",
+  "shot": "zh-pause"
+ },
+ {
+  "label": "clear",
+  "js": "game.resume(); game.quiet(); game.world().queue = []; game.step(0.3); new Promise(r => setTimeout(() => r(JSON.stringify(Kit.lang.untranslated())), 200))",
+  "shot": "zh-clear"
+ },
+ {
+  "label": "bonus",
+  "js": "game.start({ phase: 2, level: 'easy' }); game.step(0.3); const u0 = Kit.lang.untranslated(); game.step(1.3); new Promise(r => setTimeout(() => r(JSON.stringify([u0, Kit.lang.untranslated()])), 200))",
+  "shot": "zh-bonus"
+ },
+ {
+  "label": "bonus time up",
+  "js": "game.step(31); new Promise(r => setTimeout(() => r(JSON.stringify(Kit.lang.untranslated())), 200))"
+ },
+ {
+  "label": "perfect",
+  "js": "(() => { game.start({ phase: 2, go: true }); const w = game.world(); for (const k of w.coins.slice()) { game.put(0, k.f, k.x); w.players[0].y = k.y - 0.5; game.step(1/60); } return new Promise(r => setTimeout(() => r(JSON.stringify(Kit.lang.untranslated())), 200)); })()",
+  "shot": "zh-perfect"
+ },
+ {
+  "label": "2P hi5 pop",
+  "js": "(() => { game.start({ players: 2, go: true }); game.quiet(); game.call(); game.step(0.2); const u = Kit.lang.untranslated(); game.put(0, 1, -6.6); game.put(1, 0, -6.6); dispatchEvent(new KeyboardEvent('keydown',{code:'ArrowUp'})); game.step(0.05); dispatchEvent(new KeyboardEvent('keyup',{code:'ArrowUp'})); game.step(0.3); return new Promise(r => setTimeout(() => r(JSON.stringify([u, Kit.lang.untranslated()])), 100)); })()",
+  "shot": "zh-2p"
+ },
+ {
+  "label": "2P out, over",
+  "js": "(() => { const w = game.world(); w.players[1].lives = 1; w.players[1].mode = 'bonked'; w.players[1].t = 9; game.step(0.1); const u = Kit.lang.untranslated(); w.players[0].lives = 1; w.players[0].mode = 'bonked'; w.players[0].t = 9; game.step(0.3); return new Promise(r => setTimeout(() => r(JSON.stringify([u, Kit.lang.untranslated()])), 100)); })()",
+  "shot": "zh-over"
+ },
+ {
+  "label": "2P results",
+  "js": "game.step(2.5); new Promise(r => setTimeout(() => r(JSON.stringify([game.state().screen, Kit.lang.untranslated()])), 300))",
+  "shot": "zh-results2"
+ },
+ {
+  "label": "1P results",
+  "js": "(() => { game.start({ players: 1, go: true }); const w = game.world(); w.players[0].score = 4321; w.players[0].lives = 1; w.players[0].mode = 'bonked'; w.players[0].t = 9; game.step(2.8); return new Promise(r => setTimeout(() => r(JSON.stringify([game.state().screen, Kit.lang.untranslated()])), 300)); })()",
+  "shot": "zh-results1"
+ },
+ {
+  "label": "english has no CJK (visible text, title, ? panel, play)",
+  "js": "(() => { Kit.lang.set('en'); const scan = () => { const bad = []; const walk = (n) => { if (n.nodeType === 3) { const el = n.parentElement; if (/[\\u3400-\\u9fff]/.test(n.textContent) && el && el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden') bad.push(n.textContent.trim().slice(0, 24)); return; } if (n.nodeType === 1 && (n.tagName === 'SCRIPT' || n.tagName === 'STYLE')) return; for (const c of n.childNodes) walk(c); }; walk(document.body); return bad; }; game.showTitle(); return new Promise(r => setTimeout(() => { const a = scan(); Kit.help.open(); setTimeout(() => { const b = scan(); Kit.help.close(); game.start({}); game.step(2); r(JSON.stringify({ title: a, help: b, play: scan() })); }, 300); }, 300)); })()"
+ }
+]

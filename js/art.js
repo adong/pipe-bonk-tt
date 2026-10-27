@@ -57,9 +57,9 @@
       A.bubbles.push(b);
     }
     const d = duck();
-    d.position.set(0, 8.1, -2.9);
+    d.position.set(0, 8.7, -2.9);
     d.rotation.y = -0.5;
-    d.scale.setScalar(0.7);
+    d.scale.setScalar(0.45);
     scene.add(d);
   };
   // a rubber duck (on the wall, between the floors)

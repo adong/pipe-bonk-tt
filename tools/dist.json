@@ -1,0 +1,31 @@
+[
+ {
+  "label": "muted",
+  "js": "localStorage.setItem('claudeGames.muted', '1'); localStorage.setItem('claudeGames.lang', 'en'); location.reload(); 'reload'",
+  "wait": 5000
+ },
+ {
+  "label": "boots",
+  "js": "JSON.stringify({ screen: game.state().screen, title: document.title, scripts: document.querySelectorAll('script[src]').length })"
+ },
+ {
+  "label": "real frames run the demo",
+  "js": "new Promise(r => { const a = game.world().t, c = JSON.stringify(game.state().critters.map((q) => q.x)); setTimeout(() => r(JSON.stringify({ seconds: +(game.world().t - a).toFixed(2), crittersMoved: JSON.stringify(game.state().critters.map((q) => q.x)) !== c, phase: game.state().phase })), 1500); })"
+ },
+ {
+  "label": "? panel freezes the game",
+  "js": "(() => { game.start({ level: 'easy', go: true }); return new Promise(r => setTimeout(() => { Kit.help.open(); const t0 = game.world().t; setTimeout(() => { const t1 = game.world().t; Kit.help.close(); setTimeout(() => r(JSON.stringify({ frozenFor: '1.2 s', ticksWhileOpen: Math.round((t1 - t0) * 60), runsAfter: game.world().t > t1 })), 600); }, 1200); }, 500)); })()"
+ },
+ {
+  "label": "playCheck",
+  "js": "(() => { const r = game.playCheck(); return JSON.stringify({ ok: r.ok, total: r.total, failed: r.failed }); })()"
+ },
+ {
+  "label": "headless check",
+  "js": "(() => { const r = game.check(); return JSON.stringify({ ok: r.ok, n: r.results.length, failed: r.failed }); })()"
+ },
+ {
+  "label": "headless check can fail",
+  "js": "(() => { const r = game.checkFail(); return JSON.stringify({ ok: r.ok, caught: r.caught.filter((c) => c.caught).length, of: r.caught.length }); })()"
+ }
+]
